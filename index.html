@@ -1,0 +1,18 @@
+<script type="text/javascript">
+$.get("https://rss.nytimes.com/services/xml/rss/nyt/World.xml", function(data) {
+    var $XML = $(data);
+    $XML.find("item").each(function() {
+        var $this = $(this),
+            item = {
+                title:       $this.find("title").text(),
+                link:        $this.find("link").text(),
+                description: $this.find("description").text(),
+                pubDate:     $this.find("pubDate").text(),
+                author:      $this.find("author").text()
+            };
+        $('#rss-div').append('<a href="' + item.link + '">' + item.title + '</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+        //etc.
+    });
+});
+</script>
+<marquee behavior=scroll direction="left" scrollamount="15"><div id="rss-div" style="font-size:3em;"></div></marquee>
